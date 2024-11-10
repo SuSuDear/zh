@@ -7,115 +7,125 @@
     <style>
         /* 全局样式 */
         body {
-            background-color: #f0f2f5;
-            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f2f5, #d9e2ec);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            padding: 40px 20px;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
         h1 {
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             text-align: center;
+            font-size: 2em;
+            letter-spacing: 1px;
         }
         .converter-container {
             background-color: #fff;
-            padding: 20px 20px 30px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 30px 25px 40px 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
+            box-sizing: border-box;
         }
         .input-group {
             display: flex;
             flex-direction: column;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         .input-group label {
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             color: #555;
-            font-size: 14px;
+            font-size: 16px;
+            font-weight: 500;
         }
         .input-group input {
-            padding: 10px 15px;
+            padding: 12px 20px;
             border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
+            border-radius: 6px;
+            font-size: 16px;
             transition: border-color 0.3s, box-shadow 0.3s;
+            outline: none;
         }
         .input-group input:focus {
-            border-color: #007BFF;
-            outline: none;
-            box-shadow: 0 0 5px rgba(0,123,255,0.3);
+            border-color: #7f7fd5;
+            box-shadow: 0 0 8px rgba(127, 127, 213, 0.5);
         }
         button {
             width: 100%;
-            padding: 10px 0;
-            background-color: #007BFF;
+            padding: 12px 0;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
             border: none;
             color: #fff;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
+            font-size: 18px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+            margin-top: 10px;
         }
         button:hover {
-            background-color: #0056b3;
+            background: linear-gradient(45deg, #2575fc, #6a11cb);
+            transform: translateY(-2px);
         }
         .output-group {
-            margin-top: 20px;
-            position: relative;
+            margin-top: 25px;
+            text-align: center;
         }
         .output-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             color: #555;
-            font-size: 14px;
+            font-size: 16px;
+            font-weight: 500;
         }
         .output-container {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            width: 100%;
         }
         .output-container input {
-            flex: 1;
-            padding: 10px 15px;
+            width: 100%;
+            padding: 12px 20px;
             border: 1px solid #ccc;
-            border-radius: 4px 0 0 4px;
-            font-size: 14px;
+            border-radius: 6px;
+            font-size: 16px;
             background-color: #f9f9f9;
             cursor: pointer;
             transition: background-color 0.3s;
+            box-sizing: border-box;
+            margin-bottom: 10px;
         }
         .output-container input:hover {
             background-color: #f1f1f1;
         }
         .copy-button {
-            padding: 10px 15px;
-            background-color: #28a745;
+            width: 100%;
+            padding: 12px 0;
+            background: linear-gradient(45deg, #43cea2, #185a9d);
             border: none;
             color: #fff;
-            border-radius: 0 4px 4px 0;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
         }
         .copy-button:hover {
-            background-color: #218838;
-        }
-        .copy-button:active {
-            background-color: #1e7e34;
+            background: linear-gradient(45deg, #185a9d, #43cea2);
+            transform: translateY(-2px);
         }
         .copy-success {
-            position: absolute;
-            top: -25px;
-            right: 0;
+            margin-top: 10px;
             background-color: #28a745;
             color: #fff;
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 4px;
-            font-size: 12px;
+            font-size: 14px;
             opacity: 0;
             transition: opacity 0.3s;
         }
@@ -123,13 +133,13 @@
             opacity: 1;
         }
         .error-message {
-            color: red;
-            margin-top: 10px;
-            font-size: 14px;
+            color: #e74c3c;
+            margin-top: 15px;
+            font-size: 16px;
             text-align: center;
         }
         .footer {
-            margin-top: 30px;
+            margin-top: 40px;
             color: #888;
             font-size: 14px;
             text-align: center;
@@ -138,17 +148,18 @@
         /* 移动端适配 */
         @media (max-width: 480px) {
             .converter-container {
-                padding: 15px 15px 25px 15px;
+                padding: 25px 20px 35px 20px;
             }
-            button {
-                font-size: 14px;
+            h1 {
+                font-size: 1.8em;
             }
-            .copy-button {
-                font-size: 14px;
+            button, .copy-button {
+                font-size: 16px;
+                padding: 10px 0;
             }
             .copy-success {
-                top: -20px;
-                right: 10px;
+                margin-top: 8px;
+                font-size: 12px;
             }
         }
     </style>
@@ -165,7 +176,7 @@
             <label>转换后的链接:</label>
             <div class="output-container">
                 <input type="text" id="newURL" readonly placeholder="转换后的链接将显示在这里" onclick="selectText('newURL')">
-                <button class="copy-button" onclick="copyToClipboard()">复制</button>
+                <button class="copy-button" onclick="copyToClipboard()">复制链接</button>
             </div>
             <div class="copy-success" id="copySuccess">已复制!</div>
             <div class="error-message" id="errorMessage"></div>
@@ -178,23 +189,33 @@
 
     <script>
         /**
-         * 转换 GitHub 图片链接
+         * 转换 GitHub 图片链接为直接的 Raw 图片链接
          * @param {string} originalURL - 原始 GitHub 图片链接
-         * @returns {string} 转换后的链接
+         * @returns {string} 转换后的 Raw 图片链接
          */
         function convertGitHubURL(originalURL) {
             try {
                 const url = new URL(originalURL);
+                
+                // 验证域名是否为 github.com 或 www.github.com
+                if (url.hostname !== 'github.com' && url.hostname !== 'www.github.com') {
+                    throw new Error('请输入有效的GitHub图片链接');
+                }
+
                 const pathnameParts = url.pathname.split('/');
-                const blobIndex = pathnameParts.indexOf('blob');
-                if (blobIndex === -1 || blobIndex + 2 > pathnameParts.length) {
+                
+                // GitHub URL 格式应为 /用户名/仓库/blob/分支/路径/图片名.png
+                if (pathnameParts.length < 5 || pathnameParts[3] !== 'blob') {
                     throw new Error('无效的GitHub图片链接格式');
                 }
-                // 获取分支名和路径
-                const branch = pathnameParts[blobIndex + 1];
-                const filePath = pathnameParts.slice(blobIndex + 2).join('/');
-                // 生成新的URL，移除 'images/' 部分
-                return `https://susudear.github.io/${filePath}`;
+
+                const username = pathnameParts[1];
+                const repository = pathnameParts[2];
+                const branch = pathnameParts[4];
+                const filePath = pathnameParts.slice(5).join('/');
+
+                // 生成 Raw 图片链接
+                return `https://raw.githubusercontent.com/${username}/${repository}/${branch}/${filePath}`;
             } catch (e) {
                 showError('请输入有效的GitHub图片链接');
                 return '';
